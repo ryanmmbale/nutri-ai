@@ -1,103 +1,118 @@
-import Image from "next/image";
+'use client'
+import { useState } from 'react';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [age, setAge] = useState('');
+  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState('');
+  const [condition, setCondition] = useState('');
+  const [response, setResponse] = useState('');
+  const [loading, setLoading] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+  
+    try {
+      const res = await fetch("/api/ai-feedback", {  // ✅ Remove `/app/`
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ age, weight, height, condition }),
+      });
+  
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+  
+      const data = await res.json();
+      console.log("API Response:", data);
+    } catch (error) {
+      console.error("Error fetching AI feedback:", error);
+    }
+  };
+  
+
+
+  return (
+    <>
+      
+    <header>
+        <nav>
+            <div className="logo">NutriAI</div>
+            <ul className="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" className="hero">
+            <div className="hero-content">
+                <h1>Personalized Diet Planning for Better Health</h1>
+                <p>Tailored nutrition plans for managing hypertension, diabetes, and obesity</p>
+                <button className="cta-button">Get Started</button>
+            </div>
+        </section>
+
+        <section id="about" className="about-section">
+            <h2>About NutriAI</h2>
+            <p>We use advanced AI technology to create personalized diet plans that help manage chronic health conditions while ensuring you enjoy your meals.</p>
+        </section>
+
+        <section id="services" className="services-section">
+            <h2>Our Services</h2>
+            <div className="service-cards">
+                <div className="service-card">
+                    <h3>Diabetes Management</h3>
+                    <p>Balanced meal plans to help control blood sugar levels</p>
+                </div>
+                <div className="service-card">
+                    <h3>Hypertension Care</h3>
+                    <p>Low-sodium diets tailored to your taste preferences</p>
+                </div>
+                <div className="service-card">
+                    <h3>Weight Management</h3>
+                    <p>Sustainable meal plans for healthy weight loss</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="diet-planner" className="planner-section">
+            <h2>Get Your Personalized Diet Plan</h2>
+            <form id="diet-form" className="diet-form" onSubmit={handleSubmit}>
+                <div className="form-group" >
+                    <label htmlFor="health-condition">Health Condition:</label>
+                    <select id="health-condition" name="health-condition" value={condition} onChange={e => setCondition(e.target.value)} required>
+                        <option value="" disabled>Select your condition</option>
+                        <option value="diabetes">Diabetes</option>
+                        <option value="hypertension">Hypertension</option>
+                        <option value="obesity">Obesity</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="age">Age:</label>
+                    <input type="number" id="age" name="age" placeholder="Age" value={age} onChange={e => setAge(e.target.value)} required/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="weight">Weight (kg):</label>
+                    <input type="number" id="weight" name="weight" step="0.1" placeholder="Weight (kg)" value={weight} onChange={e => setWeight(e.target.value)} required />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="height">Height (cm):</label>
+                    <input type="number" id="height" name="height" placeholder="Height (cm)" value={height} onChange={e => setHeight(e.target.value)} required />
+                </div>
+                <button type="submit" className="submit-button" disabled={loading}> {loading ? 'Processing...' : 'Generate Diet Plan'} </button>
+            </form>
+            {response && <div className="mt-4 p-4 bg-gray-100 rounded">{response}</div>}
+          </section>
+          
+    </main>
+
+    <footer>
+        <p>&copy; 2024 NutriAI. All rights reserved.</p>
+    </footer>
+    </>
   );
 }

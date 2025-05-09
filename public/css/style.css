@@ -224,3 +224,28 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/*.modal-content {*/
+/*    animation: slideIn 0.3s ease-out;*/
+/*}*/
+
+/*@keyframes slideIn {*/
+/*    from {*/
+/*        transform: translateY(-10px);*/
+/*        opacity: 0;*/
+/*    }*/
+/*    to {*/
+/*        transform: translateY(0);*/
+/*        opacity: 1;*/
+/*    }*/
+/*}*/
+
+/*.success-container {*/
+/*    max-height: calc(90vh - 100px);*/
+/*    overflow-y: auto;*/
+/*}*/
+
+/*.error-container {*/
+/*    text-align: center;*/
+/*    padding: 2rem;*/
+/*}*/

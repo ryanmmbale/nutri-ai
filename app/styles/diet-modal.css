@@ -1,0 +1,129 @@
+.diet-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.diet-modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: dietModalSlideIn 0.3s ease-out;
+}
+
+.diet-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    padding: 5px;
+    transition: color 0.2s;
+}
+
+.diet-modal-close:hover {
+    color: #333;
+}
+
+.diet-modal-success h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: #2c3e50;
+}
+
+.diet-modal-section {
+    margin-bottom: 24px;
+}
+
+.diet-modal-section h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #34495e;
+}
+
+.diet-modal-stats {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.diet-modal-meals {
+    display: grid;
+    gap: 16px;
+}
+
+.diet-modal-meal {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.diet-modal-meal h5 {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2c3e50;
+}
+
+.diet-modal-tips {
+    list-style-type: none;
+    padding: 0;
+}
+
+.diet-modal-tips li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.diet-modal-tips li:last-child {
+    border-bottom: none;
+}
+
+.diet-modal-error {
+    text-align: center;
+    padding: 30px;
+}
+
+.diet-modal-error h3 {
+    color: #e74c3c;
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+@keyframes dietModalSlideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 640px) {
+    .diet-modal-content {
+        padding: 20px;
+    }
+
+    .diet-modal-close {
+        top: 15px;
+        right: 15px;
+    }
+}
